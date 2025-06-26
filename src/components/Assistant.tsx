@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Typography,
@@ -16,12 +16,16 @@ import {
 import { knowledgeBase } from "../data/knowledgeBase";
 import copy from "copy-to-clipboard";
 import ArticleModal from "./ArticleModal";
+import { useNavigate } from "react-router-dom";
+import { useCallSession } from "../hooks/CallSessionState";
 
 const Assistant: React.FC = () => {
   const [selectedReason, setSelectedReason] = useState("");
   const [checked, setChecked] = useState<string[]>([]);
   const [isCopied, setIsCopied] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const { isVerified } = useCallSession();
+  const navigate = useNavigate();
 
   const kbEntry = knowledgeBase.find(
     (entry) => entry.reason === selectedReason
@@ -46,6 +50,12 @@ const Assistant: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (!isVerified) {
+      navigate("/");
+    }
+  }, [isVerified]);
+
   return (
     <Container maxWidth="md" sx={{ mt: 5 }}>
       <Paper elevation={4} sx={{ p: 4 }}>
@@ -67,23 +77,20 @@ const Assistant: React.FC = () => {
             {knowledgeBase.map((entry) => (
               <div>
                 <MenuItem key={entry.reason} value={entry.reason}>
-                    {entry.reason}
+                  {entry.reason}
                 </MenuItem>
-                 <Button onClick={() => setModalOpen(true)} sx={{ mb: 2 }}>
-                    View Full Article
+                <Button onClick={() => setModalOpen(true)} sx={{ mb: 2 }}>
+                  View Full Article
                 </Button>
                 <ArticleModal
-                    open={modalOpen}
-                    onClose={() => setModalOpen(false)}
-                    title={entry.reason}
-                    content={entry.fullArticle}
-                    />
-
+                  open={modalOpen}
+                  onClose={() => setModalOpen(false)}
+                  title={entry.reason}
+                  content={entry.fullArticle}
+                />
               </div>
             ))}
           </Select>
-         
-
         </FormControl>
 
         {kbEntry && (
