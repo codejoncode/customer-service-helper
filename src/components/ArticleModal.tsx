@@ -8,6 +8,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import LazyIcon from "./LazyIcon";
 const CloseIcon = lazy( () => import ("@mui/icons-material/Close"));
 
 interface ArticleModalProps {
@@ -33,12 +34,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
         {title}
-        <Suspense fallback={<div style={{ width: 24, height: 24 }} />}>
-            <IconButton onClick={onClose} sx={{ position: "absolute", right: 8, top: 8 }}>
-                <CloseIcon />
-            </IconButton>
-        </Suspense>
-        
+        <LazyIcon name={"Close"} fontSize="small" color="inherit"/>
       </DialogTitle>
       <DialogContent>
         <Typography
