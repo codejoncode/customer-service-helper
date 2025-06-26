@@ -13,7 +13,7 @@ import {
   Button,
   Paper,
 } from "@mui/material";
-import { knowledgeBase } from "../data/knowledgebase";
+import { knowledgeBase } from "../data/knowledgeBase";
 import copy from "copy-to-clipboard";
 import ArticleModal from "./ArticleModal";
 
