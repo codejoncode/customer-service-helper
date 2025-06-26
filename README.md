@@ -14,6 +14,47 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+# 🛠 Customer Service Helper
+
+A React + TypeScript app that empowers customer service reps to efficiently handle support calls, ensure all required information is communicated, and auto-generate call documentation for accurate record keeping.
+
+---
+
+## 🎯 Purpose
+
+This project was designed to:
+- Provide an interactive tool for CSRs (Customer Service Reps) to select a call reason
+- Present a checklist of required statements based on internal policy
+- Automatically generate templated documentation for copy-pasting into call logs
+- Showcase modern front-end coding skills using React, TypeScript, and UI libraries
+
+---
+
+## 🚀 Live Demo
+
+> Coming soon — stay tuned!
+
+---
+
+## 📦 Tech Stack
+
+- **React** with **TypeScript**
+- **Material UI (MUI)** for accessible UI components
+- **Zustand** for lightweight global state
+- **React Hook Form + Yup** for form management
+- **copy-to-clipboard** for one-click documentation copy
+- **Day.js** for call timestamps
+- **Prettier + ESLint** for code formatting and linting
+
+---
+
+## 🧑‍💻 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/codejoncode/customer-service-helper.git
+   cd customer-service-helper
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
