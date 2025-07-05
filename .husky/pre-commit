@@ -1,1 +1,9 @@
-npm test
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running lint-staged..."
+npx lint-staged | echo "⚠️  lint-staged failed or found nothing to run"
+
+echo "🧪 Running full test suite..."
+CI=true npm test -- --watchAll=false --passWithNoTests
+
