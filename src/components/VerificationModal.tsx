@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -7,18 +7,21 @@ import {
   Button,
   TextField,
   Typography,
+  DialogProps,
 } from "@mui/material";
 import { useCallSession } from "../hooks/CallSessionState";
 import { useNavigate } from "react-router-dom"; // at top of file
 
-interface VerificationModalProps {
+export interface VerificationModalProps {
   open: boolean;
-  onClose: () => void;
+  onClose: (event: object, reason: string) => void;
+  disablePortal?: boolean;
 }
 
 export const VerificationModal: React.FC<VerificationModalProps> = ({
   open,
   onClose,
+  disablePortal,
 }) => {
   const { member, verify } = useCallSession();
   const [step, setStep] = useState(0);
@@ -77,7 +80,7 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
       setInput("");
       if (step === steps.length - 1) {
         verify(); // ✅ mark session as verified
-        onClose(); // ✅ close modal
+        onClose({}, "manual"); // ✅ close modal
         navigate("/assistant"); // ✅ go to assistant flow
       } else {
         setStep(step + 1);
@@ -86,9 +89,22 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
       setError("That does not match our records.");
     }
   };
+  const { reset } = useCallSession();
+
+  const handleCancel = (e: React.MouseEvent) => {
+    reset();
+    onClose(e, "cancelButton");
+  };
+
 
   return (
-    <Dialog open={open}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      disablePortal={disablePortal}
+      disableEscapeKeyDown={false}
+      data-testid="verification-modal"
+    >
       <DialogTitle>Caller Verification</DialogTitle>
       <DialogContent>
         <Typography variant="body2" sx={{ mb: 1 }}>
@@ -100,10 +116,22 @@ export const VerificationModal: React.FC<VerificationModalProps> = ({
           onChange={(e) => setInput(e.target.value)}
           error={!!error}
           helperText={error}
+          slotProps={{
+            htmlInput: {
+              "data-testid":
+                current.field === "dob"
+                  ? "dob-input"
+                  : current.field === "name"
+                    ? "name-input"
+                    : current.field === "phoneOrZip"
+                      ? "phone-input"
+                      : undefined,
+            },
+          }}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={handleCancel}>Cancel</Button>
         <Button onClick={handleNext} variant="contained">
           Continue
         </Button>

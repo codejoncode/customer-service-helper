@@ -6,7 +6,7 @@ export interface MemberProfile {
   streetAddress: string;
   city: string;
   state: string;
-  zipcode: string; 
+  zipcode: string;
 }
 
 export const memberDB: MemberProfile[] = [
@@ -18,16 +18,26 @@ export const memberDB: MemberProfile[] = [
     streetAddress: "123 Elm St",
     city: "Chicago",
     state: "IL",
-    zipcode: "60610"
+    zipcode: "60610",
   },
   {
     memberId: "XYZ789101",
     name: "Jane Smith",
     dob: "07/28/1975",
     phone: "555-768-4312",
-    streetAddress: "456 Maple Ave", 
-    city:"Evanston",
-    state: "IL", 
-    zipcode: "60201"
+    streetAddress: "456 Maple Ave",
+    city: "Evanston",
+    state: "IL",
+    zipcode: "60201",
+  },
+  {
+    memberId: "ABC123456",
+    name: "Jane Doe",
+    dob: "01/01/1980",
+    phone: "555-123-4567",
+    streetAddress: "123 Elm St",
+    city: "Chicago",
+    state: "IL",
+    zipcode: "60606",
   },
 ];

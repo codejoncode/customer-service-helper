@@ -51,11 +51,11 @@ const MemberLookup: React.FC = () => {
         sx={{ mb: 2 }}
       />
 
-      <Button variant="contained" onClick={handleLookup}>
+      <Button variant="contained" onClick={handleLookup} type="submit">
         Look Up Member
       </Button>
 
-      <VerificationModal open={showVerify} onClose={() => setShowVerify(false)} />
+      <VerificationModal data-testid="verification-modal" open={showVerify} onClose={() => setShowVerify(false)} />
     </Paper>
   );
 };

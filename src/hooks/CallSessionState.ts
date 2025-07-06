@@ -14,6 +14,10 @@ export const useCallSession = create<CallSessionState>((set) => ({
   member: undefined,
   isVerified: false,
   setMember: (member) => set({ member }),
-  verify: () => set({ isVerified: true }),
+  verify: () =>
+    set((state) => {
+      if (!state.member) return {}; // ← no-op
+      return { isVerified: true };
+    }),
   reset: () => set({ member: undefined, isVerified: false }),
 }));
