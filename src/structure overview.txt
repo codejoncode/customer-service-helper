@@ -1,0 +1,10 @@
+ORGANIZATION (HealthSecure)
+├── Agents (3) ──> [OrgID]
+├── MemberProfiles (2) ──> [Lookup flow → VerificationModal]
+├── Actions (10) ──> [Selectable in CallAssistant + Summary generation]
+├── Articles (3)
+│   ├── MustSay checklist
+│   └── CallReasons --> [reasonsForCall[].relatedArticles]
+├── EndCallFlow ──> [Checklist gating Final Call Summary]
+└── ReasonsForCall (3)
+    └── Related to Articles by ID
