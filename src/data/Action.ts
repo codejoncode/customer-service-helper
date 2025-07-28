@@ -1,4 +1,4 @@
-type Action =
+export type Action =
   | "Changed PCP"
   | "Provided Specialist Directory"
   | "Updated Member Info"
